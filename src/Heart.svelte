@@ -3,15 +3,12 @@
 </script>
 
 <svg
-  title="red heart"
   class={`heart ${size}`}
-  version="1.1"
+  role="img"
   xmlns="http://www.w3.org/2000/svg"
-  width="56"
-  height="56"
   fill="#b50303"
   viewBox="0 0 32 32">
-  <title>heart</title>
+  <title>red heart</title>
   <path
     d="M23.6 2c-3.363 0-6.258 2.736-7.599
     5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0

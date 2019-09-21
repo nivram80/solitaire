@@ -3,12 +3,11 @@
 </script>
 
 <svg
-  title="black club"
   class={`club ${size}`}
-  version="1.1"
+  role="img"
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 32 32">
-  <title>clubs</title>
+  <title>black club</title>
   <path
     d="M24.588 12.274c-1.845 0-3.503 0.769-4.683 2.022-0.5 0.531-1.368
     1.16-2.306 1.713 0.441-1.683 1.834-3.803 2.801-4.733 1.239-1.193 2-2.87

@@ -3,14 +3,11 @@
 </script>
 
 <svg
-  title="black spade"
   class={`spade ${size}`}
-  version="1.1"
+  role="img"
   xmlns="http://www.w3.org/2000/svg"
-  width="56"
-  height="56"
   viewBox="0 0 32 32">
-  <title>spades</title>
+  <title>black spade</title>
   <path
     d="M25.549 10.88c-6.049-4.496-8.133-8.094-9.549-10.88v0c-0
     0-0-0-0-0v0c-1.415 2.785-3.5 6.384-9.549 10.88-10.314 7.665-0.606 18.365
