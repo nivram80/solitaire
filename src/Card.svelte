@@ -42,10 +42,11 @@
     border-radius: 4px;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
     padding: 4px 6px;
+    background-color: #fffefe;
   }
 
   .heart .value, .diamond .value {
-    color: red;
+    color: #b50303;
   }
 
   .club .value, .spade .value {

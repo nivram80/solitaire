@@ -3,12 +3,13 @@
 </script>
 
 <svg
+  title="red diamond"
   class={`diamond ${size}`}
   version="1.1"
   xmlns="http://www.w3.org/2000/svg"
   width="56"
   height="56"
-  fill="red"
+  fill="#b50303"
   viewBox="0 0 32 32">
   <title>diamonds</title>
   <path d="M16 0l-10 16 10 16 10-16z" />
