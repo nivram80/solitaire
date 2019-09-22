@@ -1,70 +1,17 @@
 <script>
 	import { onMount } from "svelte";
+	import { deck } from "./utilities/deck";
 	import Card from "./Card.svelte";
 
-	export let name;
-
 	let shuffledDeck = [];
-  const deck = [
-    ['A','spade'],
-    ['2','spade'],
-    ['3','spade'],
-    ['4','spade'],
-    ['5','spade'],
-    ['6','spade'],
-    ['7','spade'],
-    ['8','spade'],
-    ['9','spade'],
-    ['10','spade'],
-    ['J','spade'],
-    ['Q','spade'],
-    ['K','spade'],
-    ['A','heart'],
-    ['2','heart'],
-    ['3','heart'],
-    ['4','heart'],
-    ['5','heart'],
-    ['6','heart'],
-    ['7','heart'],
-    ['8','heart'],
-    ['9','heart'],
-    ['10','heart'],
-    ['J','heart'],
-    ['Q','heart'],
-    ['K','heart'],
-    ['A','diamond'],
-    ['2','diamond'],
-    ['3','diamond'],
-    ['4','diamond'],
-    ['5','diamond'],
-    ['6','diamond'],
-    ['7','diamond'],
-    ['8','diamond'],
-    ['9','diamond'],
-    ['10','diamond'],
-    ['J','diamond'],
-    ['Q','diamond'],
-    ['K','diamond'],
-    ['A','club'],
-    ['2','club'],
-    ['3','club'],
-    ['4','club'],
-    ['5','club'],
-    ['6','club'],
-    ['7','club'],
-    ['8','club'],
-    ['9','club'],
-    ['10','club'],
-    ['J','club'],
-    ['Q','club'],
-    ['K','club']
-  ];
-
+  
   onMount(() => {
     shuffledDeck = shuffle(deck);
     console.log(shuffledDeck);
   });
 
+	// Borrowed from https://javascript.info/task/shuffle which is based 
+	// on https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle.
   const shuffle = (deck) => {
     for (let i = deck.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
@@ -107,7 +54,7 @@
 	}
 </style>
 
-<h1>{name}</h1>
+<h1>Solitaire</h1>
 <main class="main">
 	<section class="foundations">
 		<div class="foundation diamond-foundation">
