@@ -4,11 +4,11 @@
 	import Card from "./Card.svelte";
 
 	let shuffledDeck = [];
-  
-  onMount(() => {
-    shuffledDeck = shuffle(deck);
-    console.log(shuffledDeck);
-  });
+	
+	const newDeal = () => {
+		shuffledDeck = shuffle(deck);
+    console.log("Shuffled Deck: ", shuffledDeck);		
+	}
 
 	// Borrowed from https://javascript.info/task/shuffle which is based 
 	// on https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle.
@@ -22,14 +22,57 @@
 </script>
 
 <style>
+	:global(html, body) {
+		margin: 0;
+		padding: 0;
+	}
+
+	.header {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+		width: 100%;
+		height: 60px;
+		padding: 0 8px;
+		background-color: black;
+	}
+
+	.title {
+		width: 33%;
+	}
+
+	.actions {
+		-webkit-appearance: none;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+		width: 66%;
+	}
+
 	h1 {
-		color: black;
+		margin: 0;
+		padding: 0;
+		color: white;
 	}
 
 	.main {
 		display: grid;
 		grid-template-areas: "foundation tableau";
 		grid-template-columns: 100px 1fr;
+	}
+
+	:global(button) {
+		-webkit-appearance: none;
+		width: auto;
+		min-width: 100px;
+		height: 32px;
+		color: white;
+		font-size: 13px;
+		background-color: rgb(181, 3, 3);
+		border: none;
+		margin: 0;
+		padding: 4px 8px;
 	}
 
 	.foundations {
@@ -39,7 +82,6 @@
 		justify-content: center;
 		align-items: flex-start;
 		padding: 8px 0;
-		background-color: black;
 	}
 
 	.foundation {
@@ -54,7 +96,14 @@
 	}
 </style>
 
-<h1>Solitaire</h1>
+<header class="header">
+	<div class="title">
+		<h1>Solitaire</h1>
+	</div>
+	<div class="actions">
+		<button on:click={newDeal}>New deal</button>
+	</div>
+</header>
 <main class="main">
 	<section class="foundations">
 		<div class="foundation diamond-foundation">
