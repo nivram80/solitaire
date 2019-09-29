@@ -16,58 +16,60 @@
 	const deal = (shuffledDeck) => {
 		stockPile = shuffledDeck;
 		let pileNumber = 1;
-		shuffledDeck.forEach((card, index) => {
+		let card = {};
+		while (seventhPile.length < 7) {
 			switch (pileNumber) {
 				case 1:
 					if (firstPile.length < 1) {
-						stockPile.splice(index, 1);
+						card = stockPile.shift();
 						firstPile.push(card);
 						++pileNumber;
+						break;
 					}
-					break;
 				case 2:
 					if (secondPile.length < 2) {
-						stockPile.splice(index, 1);
+						card = stockPile.shift();
 						secondPile.push(card);
 						++pileNumber;
+						break;
 					}
-					break;
 				case 3:
 					if (thirdPile.length < 3) {
-						stockPile.splice(index, 1);
+						card = stockPile.shift();
 						thirdPile.push(card);
 						++pileNumber;
+						break;
 					}
-					break;
 				case 4:
 					if (fourthPile.length < 4) {
-						stockPile.splice(index, 1);
+						card = stockPile.shift();
 						fourthPile.push(card);
 						++pileNumber;
+						break;
 					}
-					break;
 				case 5:
 					if (fifthPile.length < 5) {
-						stockPile.splice(index, 1);
+						card = stockPile.shift();
 						fifthPile.push(card);
 						++pileNumber;
+						break;
 					}
-					break;
 				case 6:
 					if (sixthPile.length < 6) {
-						stockPile.splice(index, 1);
+						card = stockPile.shift();
 						sixthPile.push(card);
 						++pileNumber;
+						break;
 					}
 				case 7:
 					if (seventhPile.length < 7) {
-						stockPile.splice(index, 1);
+						card = stockPile.shift();
 						seventhPile.push(card);
 						pileNumber = 1;
+						break;
 					}
-					break;
 			} 
-		})
+		}
 	}
 	
 	const newDeal = () => {
