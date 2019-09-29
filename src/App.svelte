@@ -4,10 +4,85 @@
 	import Card from "./Card.svelte";
 
 	let shuffledDeck = [];
+	let stockPile = [];
+	let firstPile = [];
+	let secondPile = [];
+	let thirdPile = [];
+	let fourthPile = [];
+	let fifthPile = [];
+	let sixthPile = [];
+	let seventhPile = [];
+
+	const deal = (shuffledDeck) => {
+		stockPile = shuffledDeck;
+		let pileNumber = 1;
+		shuffledDeck.forEach((card, index) => {
+			switch (pileNumber) {
+				case 1:
+					if (firstPile.length < 1) {
+						stockPile.splice(index, 1);
+						firstPile.push(card);
+						++pileNumber;
+					}
+					break;
+				case 2:
+					if (secondPile.length < 2) {
+						stockPile.splice(index, 1);
+						secondPile.push(card);
+						++pileNumber;
+					}
+					break;
+				case 3:
+					if (thirdPile.length < 3) {
+						stockPile.splice(index, 1);
+						thirdPile.push(card);
+						++pileNumber;
+					}
+					break;
+				case 4:
+					if (fourthPile.length < 4) {
+						stockPile.splice(index, 1);
+						fourthPile.push(card);
+						++pileNumber;
+					}
+					break;
+				case 5:
+					if (fifthPile.length < 5) {
+						stockPile.splice(index, 1);
+						fifthPile.push(card);
+						++pileNumber;
+					}
+					break;
+				case 6:
+					if (sixthPile.length < 6) {
+						stockPile.splice(index, 1);
+						sixthPile.push(card);
+						++pileNumber;
+					}
+				case 7:
+					if (seventhPile.length < 7) {
+						stockPile.splice(index, 1);
+						seventhPile.push(card);
+						pileNumber = 1;
+					}
+					break;
+			} 
+		})
+	}
 	
 	const newDeal = () => {
 		shuffledDeck = shuffle(deck);
-    console.log("Shuffled Deck: ", shuffledDeck);		
+		// console.log("Shuffled Deck: ", shuffledDeck);
+
+		deal(shuffledDeck);
+		console.log("1st Pile: ", firstPile);
+		console.log("2nd Pile: ", secondPile);
+		console.log("3rd Pile: ", thirdPile);
+		console.log("4th Pile: ", fourthPile);
+		console.log("5th Pile: ", fifthPile);
+		console.log("6th Pile: ", sixthPile);
+		console.log("7th Pile: ", seventhPile);
+		console.log("Stock Pile: ", stockPile);
 	}
 
 	// Borrowed from https://javascript.info/task/shuffle which is based 
@@ -48,6 +123,7 @@
 		flex-direction: row;
 		justify-content: flex-end;
 		width: 66%;
+		padding-right: 16px;
 	}
 
 	h1 {
@@ -73,6 +149,7 @@
 		border: none;
 		margin: 0;
 		padding: 4px 8px;
+		cursor: pointer;
 	}
 
 	.foundations {
@@ -93,6 +170,11 @@
 		display: grid;
 		grid-template-columns: repeat(7, 1fr);
 		padding: 8px 16px;
+	}
+
+	.pile {
+		width: 120px;
+		border: 1px solid black;
 	}
 </style>
 
@@ -121,13 +203,20 @@
 	</section>
 
 	<section class="tableau">
-		<Card suit="heart" value="k" />
+		<div class="pile first-pile"></div>
+		<div class="pile second-pile"></div>
+		<div class="pile third-pile"></div>
+		<div class="pile fourth-pile"></div>
+		<div class="pile fifth-pile"></div>
+		<div class="pile sixth-pile"></div>
+		<div class="pile seventh-pile"></div>
+		<!-- <Card suit="heart" value="k" />
 		<Card suit="spade" value="a" />
 		<Card suit="diamond" value="10" />
 		<Card suit="club" value="2" />
 		<Card suit="heart" value="6" />
 		<Card suit="spade" value="j" />
-		<Card suit="diamond" value="7" />
+		<Card suit="diamond" value="7" /> -->
 	</section>
 </main>
 
