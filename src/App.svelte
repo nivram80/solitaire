@@ -1,10 +1,11 @@
 <script>
-	import { onMount } from "svelte";
 	import { deck } from "./utilities/deck";
+	import Pile from "./Pile.svelte";
 	import Card from "./Card.svelte";
 
 	let shuffledDeck = [];
 	let stockPile = [];
+
 	let firstPile = [];
 	let secondPile = [];
 	let thirdPile = [];
@@ -14,67 +15,81 @@
 	let seventhPile = [];
 
 	const deal = (shuffledDeck) => {
+		let firstPileTemp = [];
+		let secondPileTemp = [];
+		let thirdPileTemp = [];
+		let fourthPileTemp = [];
+		let fifthPileTemp = [];
+		let sixthPileTemp = [];
+		let seventhPileTemp = [];
+
 		stockPile = shuffledDeck;
 		let pileNumber = 1;
 		let card = {};
-		while (seventhPile.length < 7) {
+		while (seventhPileTemp.length < 7) {
 			switch (pileNumber) {
 				case 1:
-					if (firstPile.length < 1) {
+					if (firstPileTemp.length < 1) {
 						card = stockPile.shift();
-						firstPile.push(card);
+						firstPileTemp.push(card);
 						++pileNumber;
 						break;
 					}
 				case 2:
-					if (secondPile.length < 2) {
+					if (secondPileTemp.length < 2) {
 						card = stockPile.shift();
-						secondPile.push(card);
+						secondPileTemp.push(card);
 						++pileNumber;
 						break;
 					}
 				case 3:
-					if (thirdPile.length < 3) {
+					if (thirdPileTemp.length < 3) {
 						card = stockPile.shift();
-						thirdPile.push(card);
+						thirdPileTemp.push(card);
 						++pileNumber;
 						break;
 					}
 				case 4:
-					if (fourthPile.length < 4) {
+					if (fourthPileTemp.length < 4) {
 						card = stockPile.shift();
-						fourthPile.push(card);
+						fourthPileTemp.push(card);
 						++pileNumber;
 						break;
 					}
 				case 5:
-					if (fifthPile.length < 5) {
+					if (fifthPileTemp.length < 5) {
 						card = stockPile.shift();
-						fifthPile.push(card);
+						fifthPileTemp.push(card);
 						++pileNumber;
 						break;
 					}
 				case 6:
-					if (sixthPile.length < 6) {
+					if (sixthPileTemp.length < 6) {
 						card = stockPile.shift();
-						sixthPile.push(card);
+						sixthPileTemp.push(card);
 						++pileNumber;
 						break;
 					}
 				case 7:
-					if (seventhPile.length < 7) {
+					if (seventhPileTemp.length < 7) {
 						card = stockPile.shift();
-						seventhPile.push(card);
+						seventhPileTemp.push(card);
 						pileNumber = 1;
 						break;
 					}
 			} 
 		}
+		firstPile = firstPileTemp;
+		secondPile = secondPileTemp;
+		thirdPile = thirdPileTemp;
+		fourthPile = fourthPileTemp;
+		fifthPile = fifthPileTemp;
+		sixthPile = sixthPileTemp;
+		seventhPile = seventhPileTemp;
 	}
 	
 	const newDeal = () => {
 		shuffledDeck = shuffle(deck);
-		// console.log("Shuffled Deck: ", shuffledDeck);
 
 		deal(shuffledDeck);
 		console.log("1st Pile: ", firstPile);
@@ -173,11 +188,6 @@
 		grid-template-columns: repeat(7, 1fr);
 		padding: 8px 16px;
 	}
-
-	.pile {
-		width: 120px;
-		border: 1px solid black;
-	}
 </style>
 
 <header class="header">
@@ -205,20 +215,13 @@
 	</section>
 
 	<section class="tableau">
-		<div class="pile first-pile"></div>
-		<div class="pile second-pile"></div>
-		<div class="pile third-pile"></div>
-		<div class="pile fourth-pile"></div>
-		<div class="pile fifth-pile"></div>
-		<div class="pile sixth-pile"></div>
-		<div class="pile seventh-pile"></div>
-		<!-- <Card suit="heart" value="k" />
-		<Card suit="spade" value="a" />
-		<Card suit="diamond" value="10" />
-		<Card suit="club" value="2" />
-		<Card suit="heart" value="6" />
-		<Card suit="spade" value="j" />
-		<Card suit="diamond" value="7" /> -->
+		<Pile cards={firstPile} />
+		<Pile cards={secondPile} />
+		<Pile cards={thirdPile} />
+		<Pile cards={fourthPile} />
+		<Pile cards={fifthPile} />
+		<Pile cards={sixthPile} />
+		<Pile cards={seventhPile} />
 	</section>
 </main>
 
