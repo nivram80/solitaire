@@ -33,6 +33,7 @@
 						card = stockPile.shift();
 						firstPileTemp.push(card);
 						++pileNumber;
+						card.visable = true;
 						break;
 					}
 				case 2:
@@ -40,6 +41,9 @@
 						card = stockPile.shift();
 						secondPileTemp.push(card);
 						++pileNumber;
+						if (secondPileTemp.length === 2) {
+							card.visable = true;
+						}
 						break;
 					}
 				case 3:
@@ -47,6 +51,9 @@
 						card = stockPile.shift();
 						thirdPileTemp.push(card);
 						++pileNumber;
+						if (thirdPileTemp.length === 3) {
+							card.visable = true;
+						}
 						break;
 					}
 				case 4:
@@ -54,6 +61,9 @@
 						card = stockPile.shift();
 						fourthPileTemp.push(card);
 						++pileNumber;
+						if (fourthPileTemp.length === 4) {
+							card.visable = true;
+						}
 						break;
 					}
 				case 5:
@@ -61,6 +71,9 @@
 						card = stockPile.shift();
 						fifthPileTemp.push(card);
 						++pileNumber;
+						if (fifthPileTemp.length === 5) {
+							card.visable = true;
+						}
 						break;
 					}
 				case 6:
@@ -68,6 +81,9 @@
 						card = stockPile.shift();
 						sixthPileTemp.push(card);
 						++pileNumber;
+						if (sixthPileTemp.length === 6) {
+							card.visable = true;
+						}
 						break;
 					}
 				case 7:
@@ -75,6 +91,9 @@
 						card = stockPile.shift();
 						seventhPileTemp.push(card);
 						pileNumber = 1;
+						if (seventhPileTemp.length === 7) {
+							card.visable = true;
+						}
 						break;
 					}
 			} 
@@ -185,7 +204,7 @@
 	.tableau {
 		grid-area: tableau;
 		display: grid;
-		grid-template-columns: repeat(7, 1fr);
+		grid-template-columns: repeat(7, 100px);
 		padding: 8px 16px;
 	}
 </style>
@@ -200,18 +219,10 @@
 </header>
 <main class="main">
 	<section class="foundations">
-		<div class="foundation diamond-foundation">
-			<Card suit="diamond" value="a" />
-		</div>
-		<div class="foundation heart-foundation">
-			<Card suit="heart" value="a" />		
-		</div>
-		<div class="foundation club-foundation">
-			<Card suit="club" value="a" />
-		</div>
-		<div class="foundation spade-foundation">
-			<Card suit="spade" value="a" />		
-		</div>
+		<div class="foundation diamond-foundation"></div>
+		<div class="foundation heart-foundation"></div>
+		<div class="foundation club-foundation"></div>
+		<div class="foundation spade-foundation"></div>
 	</section>
 
 	<section class="tableau">

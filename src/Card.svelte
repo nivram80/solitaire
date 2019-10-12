@@ -6,33 +6,8 @@
 
   export let suit;
   export let value;
+  export let visable;
 </script>
-
-<div class={`card ${suit}`}>
-  <div class="value">
-    {value}
-    {#if suit === "heart"}
-      <Heart size="small" />
-    {:else if suit === "spade"}
-      <Spade size="small" />
-    {:else if suit === "diamond"}
-      <Diamond size="small" />    
-    {:else if suit === "club"}
-      <Club size="small" />  
-    {/if}
-  </div>
-  <div class="suit">
-    {#if suit === "heart"}
-      <Heart />
-    {:else if suit === "spade"}
-      <Spade />
-    {:else if suit === "diamond"}
-      <Diamond />    
-    {:else if suit === "club"}
-      <Club />  
-    {/if}
-  </div>
-</div>
 
 <style>
   .card {
@@ -43,6 +18,10 @@
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
     padding: 4px 6px;
     background-color: #fffefe;
+  }
+
+  .covered {
+    background-color: darkgreen;
   }
 
   .heart .value, .diamond .value {
@@ -63,3 +42,32 @@
   }
 </style>
 
+<div 
+  class={`card ${suit}`}
+  class:covered={!visable}>
+  {#if visable}
+    <div class="value">
+      {value}
+      {#if suit === "heart"}
+        <Heart size="small" />
+      {:else if suit === "spade"}
+        <Spade size="small" />
+      {:else if suit === "diamond"}
+        <Diamond size="small" />    
+      {:else if suit === "club"}
+        <Club size="small" />  
+      {/if}
+    </div>
+    <div class="suit">
+      {#if suit === "heart"}
+        <Heart />
+      {:else if suit === "spade"}
+        <Spade />
+      {:else if suit === "diamond"}
+        <Diamond />    
+      {:else if suit === "club"}
+        <Club />  
+      {/if}
+    </div>
+  {/if}
+</div>
