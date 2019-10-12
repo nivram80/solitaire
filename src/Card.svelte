@@ -7,6 +7,7 @@
   export let suit;
   export let value;
   export let visable;
+  export let bottomCard;
 </script>
 
 <style>
@@ -20,7 +21,7 @@
     background-color: #fffefe;
   }
 
-  .covered {
+  .face-down {
     background-color: darkgreen;
   }
 
@@ -40,11 +41,16 @@
     margin-top: 16px;
     text-align: center;
   }
+  
+  .card:not(.bottom-card) {
+    margin-top: -100px;
+  }
 </style>
 
 <div 
   class={`card ${suit}`}
-  class:covered={!visable}>
+  class:face-down={!visable}
+  class:bottom-card={bottomCard}>
   {#if visable}
     <div class="value">
       {value}
