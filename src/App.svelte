@@ -109,16 +109,7 @@
 	
 	const newDeal = () => {
 		shuffledDeck = shuffle(deck);
-
 		deal(shuffledDeck);
-		console.log("1st Pile: ", firstPile);
-		console.log("2nd Pile: ", secondPile);
-		console.log("3rd Pile: ", thirdPile);
-		console.log("4th Pile: ", fourthPile);
-		console.log("5th Pile: ", fifthPile);
-		console.log("6th Pile: ", sixthPile);
-		console.log("7th Pile: ", seventhPile);
-		console.log("Stock Pile: ", stockPile);
 	}
 
 	// Borrowed from https://javascript.info/task/shuffle which is based 
@@ -199,6 +190,15 @@
 
 	.foundation {
 		margin-bottom: 12px;
+    box-sizing: border-box;
+    width: 80px;
+    height: 120px;
+    border-radius: 4px;
+		border: 4px solid rgba(0, 0, 0, 0.10);
+    padding: 4px 6px;
+		font-size: 80px;
+		color: rgba(0, 0, 0, 0.10);
+		text-align: center;
 	}
 
 	.tableau {
@@ -217,12 +217,13 @@
 		<button on:click={newDeal}>New deal</button>
 	</div>
 </header>
+
 <main class="main">
 	<section class="foundations">
-		<div class="foundation diamond-foundation"></div>
-		<div class="foundation heart-foundation"></div>
-		<div class="foundation club-foundation"></div>
-		<div class="foundation spade-foundation"></div>
+		<div class="foundation diamond-foundation">A</div>
+		<div class="foundation heart-foundation">A</div>
+		<div class="foundation club-foundation">A</div>
+		<div class="foundation spade-foundation">A</div>
 	</section>
 
 	<section class="tableau">

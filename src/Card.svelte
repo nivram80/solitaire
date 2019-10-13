@@ -21,6 +21,14 @@
     background-color: #fffefe;
   }
 
+  .card:not(.bottom-card) {
+    margin-top: -100px;
+  }
+
+  .card:not(.face-down) {
+    cursor: pointer;
+  }
+
   .face-down {
     background-color: darkgreen;
   }
@@ -42,9 +50,7 @@
     text-align: center;
   }
   
-  .card:not(.bottom-card) {
-    margin-top: -100px;
-  }
+
 </style>
 
 <div 
