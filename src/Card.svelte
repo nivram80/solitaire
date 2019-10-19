@@ -25,11 +25,11 @@
     margin-top: -100px;
   }
 
-  .card:not(.face-down) {
+  .card.face-up {
     cursor: pointer;
   }
 
-  .face-down {
+  .card:not(.face-up) {
     background-color: darkgreen;
   }
 
@@ -55,8 +55,9 @@
 
 <div 
   class={`card ${suit}`}
-  class:face-down={!visable}
-  class:bottom-card={bottomCard}>
+  class:face-up={visable}
+  class:bottom-card={bottomCard}
+  draggable={visable}>
   {#if visable}
     <div class="value">
       {value}
