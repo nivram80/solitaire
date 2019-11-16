@@ -1,15 +1,25 @@
 <script>
+  import { createEventDispatcher } from "svelte";
   import Card from "./Card.svelte";
 
-  export let cards = [];
+  const dispatch = createEventDispatcher();
+
+  export let pile = [];
+
+  const onAddCard = event => {
+    const newCard = event.detail;
+    let updatedPile = JSON.parse(JSON.stringify(pile));
+    updatedPile.cards.push(newCard);;
+    dispatch("updatePile", updatedPile);
+  }
 </script>
 
 <div class="pile">
-  {#each cards as card, index (card.key)}
+  {#each pile.cards as card, index (card.key)}
     <Card 
-      suit={card.suit} 
-      value={card.value} 
-      visable={card.visable}
-      bottomCard={index === 0} />
+      card={card}
+      bottomCard={index === 0}
+      topCard={index === pile.cards.length - 1}
+      on:addCard={onAddCard} />
   {/each}
 </div>

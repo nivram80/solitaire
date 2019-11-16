@@ -1,115 +1,120 @@
 <script>
-	import { deck } from "./utilities/deck";
-	import Pile from "./Pile.svelte";
-	import Card from "./Card.svelte";
+	import { deck } from './utilities/deck';
+	import Pile from './Pile.svelte';
+	import Card from './Card.svelte';
 
 	let shuffledDeck = [];
 	let stockPile = [];
-
-	let firstPile = [];
-	let secondPile = [];
-	let thirdPile = [];
-	let fourthPile = [];
-	let fifthPile = [];
-	let sixthPile = [];
-	let seventhPile = [];
+	let tableau = [];
 
 	const deal = (shuffledDeck) => {
-		let firstPileTemp = [];
-		let secondPileTemp = [];
-		let thirdPileTemp = [];
-		let fourthPileTemp = [];
-		let fifthPileTemp = [];
-		let sixthPileTemp = [];
-		let seventhPileTemp = [];
+		let piles = [];		
+		
+		let firstPileCards = [];
+		let secondPileCards = [];
+		let thirdPileCards = [];
+		let fourthPileCards = [];
+		let fifthPileCards = [];
+		let sixthPileCards = [];
+		let seventhPileCards = [];
 
 		stockPile = shuffledDeck;
 		let pileNumber = 1;
 		let card = {};
-		while (seventhPileTemp.length < 7) {
+		while (seventhPileCards.length < 7) {
 			switch (pileNumber) {
 				case 1:
-					if (firstPileTemp.length < 1) {
+					if (firstPileCards.length < 1) {
 						card = stockPile.shift();
-						firstPileTemp.push(card);
+						firstPileCards.push(card);
 						++pileNumber;
-						card.visable = true;
+						card.faceUp = true;
+						piles.push({ cards: firstPileCards, pileNumber: 1});
 						break;
 					}
 				case 2:
-					if (secondPileTemp.length < 2) {
+					if (secondPileCards.length < 2) {
 						card = stockPile.shift();
-						secondPileTemp.push(card);
+						secondPileCards.push(card);
 						++pileNumber;
-						if (secondPileTemp.length === 2) {
-							card.visable = true;
+						if (secondPileCards.length === 2) {
+							card.faceUp = true;
+							piles.push({ cards: secondPileCards, pileNumber: 2});
 						}
 						break;
 					}
 				case 3:
-					if (thirdPileTemp.length < 3) {
+					if (thirdPileCards.length < 3) {
 						card = stockPile.shift();
-						thirdPileTemp.push(card);
+						thirdPileCards.push(card);
 						++pileNumber;
-						if (thirdPileTemp.length === 3) {
-							card.visable = true;
+						if (thirdPileCards.length === 3) {
+							card.faceUp = true;
+							piles.push({ cards: thirdPileCards, pileNumber: 3});
 						}
 						break;
 					}
 				case 4:
-					if (fourthPileTemp.length < 4) {
+					if (fourthPileCards.length < 4) {
 						card = stockPile.shift();
-						fourthPileTemp.push(card);
+						fourthPileCards.push(card);
 						++pileNumber;
-						if (fourthPileTemp.length === 4) {
-							card.visable = true;
+						if (fourthPileCards.length === 4) {
+							card.faceUp = true;
+							piles.push({ cards: fourthPileCards, pileNumber: 4});		
 						}
 						break;
 					}
 				case 5:
-					if (fifthPileTemp.length < 5) {
+					if (fifthPileCards.length < 5) {
 						card = stockPile.shift();
-						fifthPileTemp.push(card);
+						fifthPileCards.push(card);
 						++pileNumber;
-						if (fifthPileTemp.length === 5) {
-							card.visable = true;
+						if (fifthPileCards.length === 5) {
+							card.faceUp = true;
+							piles.push({ cards: fifthPileCards, pileNumber: 5});
 						}
 						break;
 					}
 				case 6:
-					if (sixthPileTemp.length < 6) {
+					if (sixthPileCards.length < 6) {
 						card = stockPile.shift();
-						sixthPileTemp.push(card);
+						sixthPileCards.push(card);
 						++pileNumber;
-						if (sixthPileTemp.length === 6) {
-							card.visable = true;
+						if (sixthPileCards.length === 6) {
+							card.faceUp = true;
+							piles.push({ cards: sixthPileCards, pileNumber: 6});
 						}
 						break;
 					}
 				case 7:
-					if (seventhPileTemp.length < 7) {
+					if (seventhPileCards.length < 7) {
 						card = stockPile.shift();
-						seventhPileTemp.push(card);
+						seventhPileCards.push(card);
 						pileNumber = 1;
-						if (seventhPileTemp.length === 7) {
-							card.visable = true;
+						if (seventhPileCards.length === 7) {
+							card.faceUp = true;
+							piles.push({ cards: seventhPileCards, pileNumber: 7});					
 						}
 						break;
 					}
 			} 
 		}
-		firstPile = firstPileTemp;
-		secondPile = secondPileTemp;
-		thirdPile = thirdPileTemp;
-		fourthPile = fourthPileTemp;
-		fifthPile = fifthPileTemp;
-		sixthPile = sixthPileTemp;
-		seventhPile = seventhPileTemp;
+		return piles;
 	}
 	
 	const newDeal = () => {
 		shuffledDeck = shuffle(deck);
-		deal(shuffledDeck);
+		tableau = deal(shuffledDeck);
+	}
+
+	const onUpdatePile = event => {
+		const updatedPile = event.detail
+		tableau = tableau.map(pile => {
+			return pile.pileNumber === updatedPile.pileNumber
+				? updatedPile
+				: pile;
+		});
 	}
 
 	// Borrowed from https://javascript.info/task/shuffle which is based 
@@ -120,8 +125,34 @@
       [deck[i], deck[j]] = [deck[j], deck[i]];
     }
     return deck;
-  }
+	}
 </script>
+
+<header class="header">
+	<div class="title">
+		<h1>Solitaire</h1>
+	</div>
+	<div class="actions">
+		<button on:click={newDeal}>New deal</button>
+	</div>
+</header>
+
+<main class="main">
+	<section class="foundations">
+		<div class="foundation diamond-foundation">A</div>
+		<div class="foundation heart-foundation">A</div>
+		<div class="foundation club-foundation">A</div>
+		<div class="foundation spade-foundation">A</div>
+	</section>
+
+	<section class="tableau">
+		{#each tableau as pile}
+			<Pile 
+				{pile} 
+				on:updatePile={onUpdatePile} />
+		{/each}
+	</section>
+</main>
 
 <style>
 	:global(html, body) {
@@ -208,32 +239,3 @@
 		padding: 8px 16px;
 	}
 </style>
-
-<header class="header">
-	<div class="title">
-		<h1>Solitaire</h1>
-	</div>
-	<div class="actions">
-		<button on:click={newDeal}>New deal</button>
-	</div>
-</header>
-
-<main class="main">
-	<section class="foundations">
-		<div class="foundation diamond-foundation">A</div>
-		<div class="foundation heart-foundation">A</div>
-		<div class="foundation club-foundation">A</div>
-		<div class="foundation spade-foundation">A</div>
-	</section>
-
-	<section class="tableau">
-		<Pile cards={firstPile} />
-		<Pile cards={secondPile} />
-		<Pile cards={thirdPile} />
-		<Pile cards={fourthPile} />
-		<Pile cards={fifthPile} />
-		<Pile cards={sixthPile} />
-		<Pile cards={seventhPile} />
-	</section>
-</main>
-
