@@ -1,6 +1,6 @@
 <script>
   import { deck } from './utilities/deck';
-  import Pile from './Pile.svelte';
+  import Tableau from './Tableau.svelte';
   import Card from './Card.svelte';
 
   let shuffledDeck = [];
@@ -108,13 +108,6 @@
     tableau = deal(shuffledDeck);
   };
 
-  const onUpdatePile = event => {
-    const updatedPile = event.detail;
-    tableau = tableau.map(pile => {
-      return pile.pileNumber === updatedPile.pileNumber ? updatedPile : pile;
-    });
-  };
-
   // Borrowed from https://javascript.info/task/shuffle which is based
   // on https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle.
   const shuffle = deck => {
@@ -123,6 +116,13 @@
       [deck[i], deck[j]] = [deck[j], deck[i]];
     }
     return deck;
+  };
+
+  const onUpdatePile = event => {
+    const updatedPile = event.detail;
+    tableau = tableau.map(pile => {
+      return pile.pileNumber === updatedPile.pileNumber ? updatedPile : pile;
+    });
   };
 </script>
 
@@ -143,11 +143,7 @@
     <div class="foundation spade-foundation">A</div>
   </section>
 
-  <section class="tableau">
-    {#each tableau as pile}
-      <Pile {pile} on:updatePile={onUpdatePile} />
-    {/each}
-  </section>
+  <Tableau {tableau} on:updatePile={onUpdatePile} />
 </main>
 
 <style>
@@ -226,12 +222,5 @@
     font-size: 80px;
     color: rgba(0, 0, 0, 0.1);
     text-align: center;
-  }
-
-  .tableau {
-    grid-area: tableau;
-    display: grid;
-    grid-template-columns: repeat(7, 100px);
-    padding: 8px 16px;
   }
 </style>
