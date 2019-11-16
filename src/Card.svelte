@@ -27,6 +27,42 @@
   };
 </script>
 
+<div
+  class={`card ${card.suit}`}
+  class:bottom-card={bottomCard}
+  class:face-up={card.faceUp}
+  class:top-card={topCard}
+  draggable={card.faceUp}
+  on:drop|preventDefault={onDrop}
+  on:dragover|preventDefault={onDragover}
+  on:dragstart={onDragstart}>
+  {#if card.faceUp}
+    <div class="card-header">
+      {card.value}
+      {#if card.suit === 'heart'}
+        <Heart size="small" />
+      {:else if card.suit === 'spade'}
+        <Spade size="small" />
+      {:else if card.suit === 'diamond'}
+        <Diamond size="small" />
+      {:else if card.suit === 'club'}
+        <Club size="small" />
+      {/if}
+    </div>
+    <div class="card-body">
+      {#if card.suit === 'heart'}
+        <Heart />
+      {:else if card.suit === 'spade'}
+        <Spade />
+      {:else if card.suit === 'diamond'}
+        <Diamond />
+      {:else if card.suit === 'club'}
+        <Club />
+      {/if}
+    </div>
+  {/if}
+</div>
+
 <style>
   .card {
     box-sizing: border-box;
@@ -77,39 +113,3 @@
     text-align: center;
   }
 </style>
-
-<div
-  class={`card ${card.suit}`}
-  class:bottom-card={bottomCard}
-  class:face-up={card.faceUp}
-  class:top-card={topCard}
-  draggable={card.faceUp}
-  on:drop|preventDefault={onDrop}
-  on:dragover|preventDefault={onDragover}
-  on:dragstart={onDragstart}>
-  {#if card.faceUp}
-    <div class="card-header">
-      {card.value}
-      {#if card.suit === 'heart'}
-        <Heart size="small" />
-      {:else if card.suit === 'spade'}
-        <Spade size="small" />
-      {:else if card.suit === 'diamond'}
-        <Diamond size="small" />
-      {:else if card.suit === 'club'}
-        <Club size="small" />
-      {/if}
-    </div>
-    <div class="card-body">
-      {#if card.suit === 'heart'}
-        <Heart />
-      {:else if card.suit === 'spade'}
-        <Spade />
-      {:else if card.suit === 'diamond'}
-        <Diamond />
-      {:else if card.suit === 'club'}
-        <Club />
-      {/if}
-    </div>
-  {/if}
-</div>
