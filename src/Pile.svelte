@@ -3,14 +3,38 @@
   import Card from './Card.svelte';
 
   export let pile = [];
-  
+
   const dispatch = createEventDispatcher();
 
+  const isBlackSuit = suit => {
+    return suit === 'club' || suit === 'spade';
+  }
+
+  const isRedSuit = suit => {
+    return suit === 'diamond' || suit === 'heart';
+  }
+
+  const isValidDrop = (pile, dropCard) => {
+    const topCard = pile.cards[pile.cards.length - 1];
+    return topCard.value === dropCard.value + 1 && isValidSuit(topCard, dropCard);
+  }
+
+  const isValidSuit = (topCard, dropCard) => {
+    return isBlackSuit(topCard.suit)
+      ? isRedSuit(dropCard.suit)
+      : isBlackSuit(dropCard.suit);
+  }
+
   const onAddCard = event => {
-    const card = event.detail;
-    let updatedPile = JSON.parse(JSON.stringify(pile));
-    updatedPile.cards.push(card);
-    dispatch('updateDraggedToPile', updatedPile);
+    const dropCard = event.detail;
+
+    if (isValidDrop(pile, dropCard)) {
+      let updatedPile = JSON.parse(JSON.stringify(pile));
+      updatedPile.cards.push(dropCard);
+      dispatch('updateDraggedToPile', updatedPile);
+    } else {
+      console.log('nope!');
+    }
   };
 
   const onRemoveCard = () => {
