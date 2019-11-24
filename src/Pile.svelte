@@ -2,9 +2,9 @@
   import { createEventDispatcher } from 'svelte';
   import Card from './Card.svelte';
 
-  const dispatch = createEventDispatcher();
-
   export let pile = [];
+  
+  const dispatch = createEventDispatcher();
 
   const onAddCard = event => {
     const card = event.detail;

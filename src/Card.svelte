@@ -5,11 +5,11 @@
   import Diamond from './Diamond.svelte';
   import Club from './Club.svelte';
 
-  const dispatch = createEventDispatcher();
-
   export let bottomCard;
   export let card;
   export let topCard;
+
+  const dispatch = createEventDispatcher();
 
   const onDragover = event => {
     // console.log(event);
