@@ -42,7 +42,7 @@
   on:dragstart={onDragstart}>
   {#if card.faceUp}
     <div class="card-header">
-      {card.value}
+      {card.displayValue}
       {#if card.suit === 'heart'}
         <Heart size="small" />
       {:else if card.suit === 'spade'}
