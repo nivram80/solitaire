@@ -130,6 +130,7 @@
     const updatedPile = event.detail;
     tableau = updateTableau(updatedPile);
     draggedFromPile.cards[draggedFromPile.cards.length - 1].faceUp = true;
+    draggedFromPile = [];
   };
 
   const updateTableau = updatedPile => {
