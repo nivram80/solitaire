@@ -4,6 +4,7 @@
   import Tableau from './Tableau.svelte';
   import Card from './Card.svelte';
 
+  let draggedFromPile = [];
   let shuffledDeck = [];
   let stockPile = [];
   let tableau = [];
@@ -119,12 +120,23 @@
     return deck;
   };
 
-  const onUpdatePile = event => {
+  const updateDraggedFromPile = event => {
     const updatedPile = event.detail;
-    tableau = tableau.map(pile => {
+    draggedFromPile = updatedPile;
+    tableau = updateTableau(updatedPile);
+  }
+
+  const updateDraggedToPile = event => {
+    const updatedPile = event.detail;
+    tableau = updateTableau(updatedPile);
+    draggedFromPile.cards[draggedFromPile.cards.length - 1].faceUp = true;
+  };
+
+  const updateTableau = updatedPile => {
+    return tableau.map(pile => {
       return pile.pileNumber === updatedPile.pileNumber ? updatedPile : pile;
     });
-  };
+  }
 </script>
 
 <header class="header">
@@ -138,7 +150,10 @@
 
 <main class="main">
   <Foundations />
-  <Tableau {tableau} on:updatePile={onUpdatePile} />
+  <Tableau 
+    {tableau} 
+    on:updateDraggedFromPile={updateDraggedFromPile}
+    on:updateDraggedToPile={updateDraggedToPile} />
 </main>
 
 <style>

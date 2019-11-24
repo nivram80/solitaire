@@ -6,7 +6,7 @@
 
 <section class="tableau">
   {#each tableau as pile}
-    <Pile {pile} on:updatePile />
+    <Pile {pile} on:updateDraggedToPile on:updateDraggedFromPile />
   {/each}
 </section>
 

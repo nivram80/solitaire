@@ -12,16 +12,20 @@
   export let topCard;
 
   const onDragover = event => {
-    event.dataTransfer.dropEffect = 'move';
+    // console.log(event);
   };
 
   const onDragstart = event => {
     event.dataTransfer.setData('text/plain', JSON.stringify(card));
-    event.dataTransfer.dropEffect = 'move';
+    // Have to wait for the browser to make a copy of the element before we remove it.
+    // https://stackoverflow.com/questions/36379184/html5-draggable-hide-original-element
+    setTimeout(() => {
+      dispatch('removeCard', card);
+    }, 1);
   };
 
   const onDrop = event => {
-    let data = event.dataTransfer.getData('text/plain');
+    const data = event.dataTransfer.getData('text/plain');
     dispatch('addCard', JSON.parse(data));
     event.preventDefault();
   };
